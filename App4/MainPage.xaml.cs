@@ -103,5 +103,11 @@ namespace App4
         {
 
         }
+
+        private void About_Version(object sender, RoutedEventArgs e)
+        {
+            BlankPage1 mp1 = new BlankPage1();
+            mp1.InitializeComponent();
+        }
     }
 }

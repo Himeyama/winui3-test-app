@@ -52,7 +52,7 @@
                 </muxc:MenuBarItem>
 
                 <muxc:MenuBarItem Title="ヘルプ">
-                    <MenuFlyoutItem Text="テストアプリのバージョン情報"/>
+                    <MenuFlyoutItem Text="テストアプリのバージョン情報" Click="About_Version"/>
                 </muxc:MenuBarItem>
             </muxc:MenuBar>
         </StackPanel>
