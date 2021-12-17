@@ -7,8 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
-
+        <StackPanel>
+            <Border Width="600" Height="200" Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" 
+                                Margin="16"
+                                CornerRadius="8"
+                                BorderThickness="1"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Content here!</TextBlock>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

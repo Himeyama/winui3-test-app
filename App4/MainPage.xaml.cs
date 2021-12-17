@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using Windows.UI.WindowManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -97,17 +100,12 @@ namespace App4
             }
         }
 
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void About_Version(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void About_Version(object sender, RoutedEventArgs e)
-        {
-            BlankPage1 mp1 = new BlankPage1();
-            mp1.InitializeComponent();
+            BlankPage1 frame = new BlankPage1();
+            var appWindow = await AppWindow.TryCreateAsync();
+            ElementCompositionPreview.SetAppWindowContent(appWindow, frame);
+            await appWindow.TryShowAsync();
         }
     }
 }
