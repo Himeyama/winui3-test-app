@@ -57,7 +57,7 @@
             </muxc:MenuBar>
         </StackPanel>
         <StackPanel Margin="0,80,0,0">
-            <Border Width="600" Height="200" Background="{ThemeResource LayerFillColorDefaultBrush}"
+            <Border Width="300" Height="200" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 VerticalAlignment="Top" 
                                 HorizontalAlignment="Left" 
                                 Margin="16"
