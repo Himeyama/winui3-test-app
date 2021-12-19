@@ -17,6 +17,7 @@ namespace App4
     {
         string sentence;
         IReadOnlyList<Language> langs;
+        StorageFile file;
 
         public MainPage(): base()
         {
@@ -36,13 +37,14 @@ namespace App4
 
                 SelectLang.Items.Add(langNativeName);
             }
+            SelectLang.SelectedIndex = 0;
         }
 
         private async void OpenFile(object sender, RoutedEventArgs e)
         {
             FileOpenPicker filePicker = new();
             filePicker.FileTypeFilter.Add(".png");
-            StorageFile file = await filePicker.PickSingleFileAsync();
+            file = await filePicker.PickSingleFileAsync();
             //string fileName = file.Path;
 
             if (file != null)
@@ -54,9 +56,16 @@ namespace App4
                     inputImage.Source = bitmapImage;
                 }
 
+                SelectLang_SelectionChanged(sender, e);
+            }
+        }
+
+        private async void SelectLang_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (file != null)
+            {
                 // 言語
                 Language lang = langs[SelectLang.SelectedIndex];
-
 
                 // OCR
                 SoftwareBitmap softwareBitmap;

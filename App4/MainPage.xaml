@@ -53,7 +53,7 @@
 
             <TextBlock TextWrapping="Wrap" Text="テキストの言語" Margin="16,16,0,0"/>
 
-            <ComboBox Width="200" Margin="16,16,0,0" x:Name="SelectLang"/>
+            <ComboBox Margin="16,16,0,0" x:Name="SelectLang" SelectionChanged="SelectLang_SelectionChanged"/>
 
             <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
                                 HorizontalAlignment="Left" 
