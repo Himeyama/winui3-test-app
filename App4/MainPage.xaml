@@ -25,7 +25,7 @@
                     Source="Assets/Square44x44Logo.png" 
                     Width="16" 
                     Height="16" Margin="16,0,0,0"/>
-                <muxc:MenuBar>
+                <muxc:MenuBar Padding="0,0,3,0" Margin="8,0,0,0">
                     <muxc:MenuBarItem Title="ファイル">
                         <MenuFlyoutItem Text="新規" />
                         <MenuFlyoutItem Text="開く..." Click="OpenFile" />
@@ -45,34 +45,77 @@
                     <TextBlock
                     Text="テストアプリ"
                     x:Name="AppTitleText"
-                    Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Left" Margin="64,0,0,0" FontSize="14" />
+                    Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Left" Margin="128,0,0,0" FontSize="14" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Margin="0,40,0,0">
+        <Grid Margin="0,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="432" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <TextBlock TextWrapping="Wrap" Text="テキストの言語" Margin="16,16,0,0"/>
+            <!--<TextBlock TextWrapping="Wrap" Text="テキストの言語" Margin="16,16,0,0"/>-->
 
-            <ComboBox Margin="16,16,0,0" x:Name="SelectLang" SelectionChanged="SelectLang_SelectionChanged"/>
-
-            <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
+            <StackPanel Width="432" HorizontalAlignment="Left">
+                <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
                                 HorizontalAlignment="Left" 
                                 Margin="16,16,16,0"
                                 Padding="16"
                                 CornerRadius="8"
                                 BorderThickness="1"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <Image x:Name="inputImage" Source="/Assets/Square150x150Logo.scale-200.png" />
-            </Border>
-            <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel VerticalAlignment="Center">
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF2B7;" Margin="4,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Width="135" VerticalAlignment="Center" Padding="16,0,0,0">
+                            <TextBlock Text="テキストの言語" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <ComboBox x:Name="SelectLang" SelectionChanged="SelectLang_SelectionChanged" HorizontalAlignment="Right" Width="192">
+                        </ComboBox>
+                        <StackPanel Width="100"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                                HorizontalAlignment="Left" 
+                                Margin="16,16,16,0"
+                                Padding="16"
+                                CornerRadius="8"
+                                BorderThickness="1"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                    <Image x:Name="inputImage" Source="/Assets/Square150x150Logo.scale-200.png" />
+                </Border>
+                <Border Width="400" Background="{ThemeResource LayerFillColorDefaultBrush}" 
                                 HorizontalAlignment="Left" 
                                 Margin="16"
                                 Padding="16"
                                 CornerRadius="8"
                                 BorderThickness="1"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <TextBlock x:Name="text" Text="画像が選択されていません。" TextWrapping="WrapWholeWords" />
-            </Border>
-        </StackPanel>
+                    <StackPanel>
+                        <TextBlock x:Name="text" Text="画像が選択されていません。" TextWrapping="WrapWholeWords" />
+                        <StackPanel Margin="0,16,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Name="TextCopy" HorizontalAlignment="Right">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C8;"/>
+                                    <TextBlock Text="コピー" Margin="8,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Name="TranslationBtn" HorizontalAlignment="Right" Margin="8,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF2B7;"/>
+                                    <TextBlock Text="翻訳" Margin="8,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <WebView Name="wv2" Source="https://translate.google.co.jp/?hl=ja/" />
+            </Grid>
+        </Grid>
     </Grid>
 </local:BasicPage>

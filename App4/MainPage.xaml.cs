@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Windows.Foundation;
 using Windows.Globalization;
 using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
@@ -8,6 +11,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -78,8 +82,39 @@ namespace App4
                 OcrEngine ocrEngine = OcrEngine.TryCreateFromLanguage(lang);
                 OcrResult result = await ocrEngine.RecognizeAsync(softwareBitmap);
                 sentence = result.Text;
-                text.Text = sentence;
+                text.Text = "";
+
+                Regex regex = new("[a-zA-Z]+|.+?");
+                MatchCollection words = regex.Matches(sentence);
+
+                foreach (Match word in words)
+                {
+                    string sWord = word.Value;
+                    Run run = new();
+                    if (Regex.IsMatch(sWord, "[a-zA-Z]+"))
+                    {
+                        Hyperlink hyperlink = new Hyperlink();
+                        //hyperlink.NavigateUri = uri;
+                        run.Text = sWord;
+                        hyperlink.Inlines.Add(run);
+                        hyperlink.Click += OpenLink;
+                        hyperlink.AccessKey = sWord;
+
+                        text.Inlines.Add(hyperlink);
+                    }
+                    else
+                    {
+                        run.Text = sWord;
+                        text.Inlines.Add(run);
+                    }
+                }
             }
+        }
+
+        private void OpenLink(Hyperlink sender, HyperlinkClickEventArgs args)
+        {
+            Uri uri = new($"https://translate.google.co.jp/?hl=ja&sl=en&tl=ja&text={sender.AccessKey}");
+            wv2.Navigate(uri);
         }
 
         private void ExitApp(object sender, RoutedEventArgs e)
